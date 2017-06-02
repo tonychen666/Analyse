@@ -216,6 +216,8 @@ public class MyAnalyse {
                     {
 
                         //输出错误，并在文件中纪录
+                        //调用错误文件
+                        logError("",line);
                         System.out.println("error"+line);
                         i++;
                     }
@@ -237,19 +239,14 @@ public class MyAnalyse {
                 default:
                     i++;
                     //打印错误的函数调用
-                    logError("",line);
-                    System.out.println("error++1");
+                    logError("unknown word",line);
 
             }
-
-
 
         }
 
         //在末尾打印end标志
         logWrite("END",25);
-
-
 
 
 
@@ -260,6 +257,14 @@ public class MyAnalyse {
     public  void logError(String error,int line)
 
     {
+
+        /*
+
+        错误类型分为
+        1.出现未知运算符
+        2.出现字母表以外的非法字符
+        3.未知错误
+         */
         try{
 
             //设定错误文件的路径
@@ -267,15 +272,11 @@ public class MyAnalyse {
 
             FileWriter writer = new FileWriter(fileName, true);
 
-
-
             Formatter formatter1=new Formatter(writer);
             //执行写入的操作：
             formatter1.format("%16s %d\n",error,line);
 
             formatter1.close();
-
-
 
 
         }
@@ -327,33 +328,31 @@ public class MyAnalyse {
         //先打印出来，最后直接持久化到test.dyd文件里面
 
         System.out.printf("%16s %2d\n",str,kindNumber);
-//
-//        try{
-//
-//            Formatter f = new Formatter(System.out);
-//
-//            //设定生成二元式的文件路径
-//            String fileName="/Users/wangdong/test.dyd";
-//
-//
-//            //利用formatter包装器
-//            FileWriter writer = new FileWriter(fileName, true);
-//            Formatter formatter = new Formatter(writer);
-//            // 这样也可以，加了个buffer缓冲包装 Formatter formatter1 = new Formatter(new BufferedOutputStream(writer));
-//            formatter.format("%16s %2d\n",str,kindNumber);
-//
-//            //直接利用formatter来进行文件的关闭操作
-//            formatter.close();
-//
-//
-//
-//
-//        }
-//        catch (Exception e)
-//        {
-//
-//            e.printStackTrace();
-//        }
+
+        try{
+
+            //设定生成二元式的文件路径
+            String fileName="/Users/wangdong/test.dyd";
+
+
+            //利用formatter包装器
+            FileWriter writer = new FileWriter(fileName, true);
+            Formatter formatter = new Formatter(writer);
+            // 这样也可以，加了个buffer缓冲包装 Formatter formatter1 = new Formatter(new BufferedOutputStream(writer));
+            formatter.format("%16s %2d\n",str,kindNumber);
+
+            //直接利用formatter来进行文件的关闭操作
+            formatter.close();
+
+
+
+
+        }
+        catch (Exception e)
+        {
+
+            e.printStackTrace();
+        }
 
 
     }
@@ -376,11 +375,5 @@ public class MyAnalyse {
             return false;
 
     }
-
-
-
-
-
-
 
 }

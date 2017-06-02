@@ -3,8 +3,7 @@ import java.io.FileReader;
 
 /*
 
-还未进行错误的详细处理
-debug完成
+
  */
 
 public class Main {
@@ -41,7 +40,7 @@ public class Main {
 
 
 
-            System.out.println(text.toString());
+//            System.out.println(text.toString());
 
         }
         catch(Exception e)
